@@ -66,10 +66,10 @@ public:
     vector<student> student_vt;
 
     void display_data();
-    student* add_student(int n);
+    void add_student(student &new_student,int n);
     void rm_student(string &input_id);
     student* find_student(string &input_id);
-    void select(student *new_student);
+    void select(student new_student);
 };
 
 void managerStudent::display_data() {
@@ -99,18 +99,12 @@ student* managerStudent::find_student(string &input_id) {
     return nullptr;
 }
 
-student* managerStudent::add_student(int n) {
+void managerStudent::add_student(student &new_student,int n) {
     cout << "Add Student" << endl;
-    //student *new_student= new student;
-    //new_student->in_data(n);
     for(int i=0;i<n;i++){
-        student *new_student= new student;
-        new_student->in_data(1);
-        student_vt.push_back(*new_student);
-        delete new_student; 
+        new_student.in_data(1);
+        student_vt.push_back(new_student); 
     }
-    return nullptr;
-//    return new_student;
 }
 
 void managerStudent::rm_student(string &input_id) {
@@ -128,7 +122,7 @@ void managerStudent::rm_student(string &input_id) {
     }
 }
 
-void managerStudent::select(student *new_student) {
+void managerStudent::select(student new_student) {
     while (1) {
         cout << "------------------------------" << endl;
         cout << "1. Add Student" << endl;
@@ -144,7 +138,7 @@ void managerStudent::select(student *new_student) {
                 int n;
                 cout << "Enter Number of Student: ";
                 cin >> n;
-                new_student = add_student(n);
+                add_student(new_student,n);
                 break;
             }
             case 2:{
@@ -182,9 +176,9 @@ void managerStudent::select(student *new_student) {
 
 int main() {
     int n;
-    student *new_student = new student;
+    student new_student;
     managerStudent manager;
-    manager.select(nullptr);
+    manager.select(new_student);
     string input_id;
     return 0;
 }
